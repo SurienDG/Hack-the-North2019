@@ -1,14 +1,11 @@
 from radon.complexity import cc_rank, cc_visit
 from radon.metrics import mi_visit, mi_rank
 from radon.raw import analyze
-#cc_rank(4), cc_rank(9), cc_rank(14), cc_rank(23)
-#('A', 'B', 'C', 'D')
 
 # Metrics that are usable: Maintainability Index
 
 teststring = ('''
-
-
+  `
 ''')
 
 def my_function():
