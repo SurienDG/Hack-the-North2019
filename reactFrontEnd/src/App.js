@@ -17,13 +17,6 @@ import VisibilitySensor from 'react-visibility-sensor'
 
 
 
-const links = {
-  github: "https://github.com/suriendg",
-  linkedin: "https://www.linkedin.com/in/surien-das-giwojno/",
-  devpost: "https://devpost.com/SurienDG",
-  email: "mailto:surien.das-giwojno@uwaterloo.ca"
-}
-
 let myNav;
 let cardsElem;
 
@@ -119,7 +112,7 @@ class App extends Component {
             params={particleConfig} />
 
 
-          <MainImage id="mainImage" src="ProfilePic.JPG" />
+          <MainImage id="mainImage" src="githubProfile.png" />
           <span>You failed</span>
           <Container>
             <Row>
