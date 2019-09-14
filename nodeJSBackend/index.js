@@ -1,7 +1,7 @@
 const express = require('express')
 const github_api = require('./interface')
 const app = express()
-const port = 3000
+const port = 2525
 const https = require('https');
 const fs = require('fs');
 const pie_chart = require('./pie_chart')
@@ -91,6 +91,13 @@ app.get("/stats/piechart/:user", (req, res) => {
     }).catch(err => {
         console.error(err.message)
     });
+});
+
+app.get("/avatar/:user", (req, res) => {
+    github_api.get(`/users/${req.params.user}`).then((response) => {
+        let responseParse = JSON.parse(response);
+        res.json(responseParse.avatar_url);
+    })
 });
 
 
