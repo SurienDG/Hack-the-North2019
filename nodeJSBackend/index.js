@@ -1,9 +1,16 @@
 const express = require('express')
-const github_api = require('./interface.js')
+const github_api = require('./interface')
 const app = express()
 const port = 3000
 const https = require('https');
 const fs = require('fs');
+const pie_chart = require('./pie_chart')
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
+
+
+app.get("/stats/repolist/:user", (req, res) => {
 
 /*
 app.get("/stats/composition/:user", async function (req, res) {
@@ -11,10 +18,10 @@ app.get("/stats/composition/:user", async function (req, res) {
     user = req.params.user;
     github_api.get(`/users/${user}/repos`)
         .then(function (response) {
-            data_back = ""
+            data_back = "";
             JSON.parse(response).forEach(i => {
-                data_back += (i["name"])
-                data_back += "<br>"
+                data_back += (i["name"]);
+                data_back += "<br>";
             });
             data_back += req.path
             res.send(data_back)
@@ -73,9 +80,18 @@ app.get("/shabranch/:owner/:repo/:branch", async function (req, res) {
             tree_sha = (parsed["commit"]["commit"]["tree"]["sha"])
             console.log(tree_sha)
         }).catch(function name(err) {
-            console.error("Not good")
-            console.error(err)
+            console.error(err.message);
         })
-})
+});
 
-app.listen(port, () => console.log(`Listening on port ${port}!`))
+app.get("/stats/piechart/:user", (req, res) => {
+    pie_chart.piechart(req.params.user)
+    .then((pie) => {
+        res.send((pie))
+    }).catch(err => {
+        console.error(err.message)
+    });
+});
+
+
+app.listen(port, () => console.log(`Listening on port ${port}!`));
