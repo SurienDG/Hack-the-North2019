@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
+import Chart from './Chart';
 //import TypeWriter from './TypeWriter';
 import MyNav from './Nav';
 import Particles from 'react-particles-js';
@@ -170,7 +171,7 @@ class App extends Component {
           </div>
         </VisibilitySensor>
 
-
+        <Chart/>
       </div>
     );
   }
