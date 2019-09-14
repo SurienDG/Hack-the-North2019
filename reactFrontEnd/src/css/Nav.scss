@@ -1,0 +1,42 @@
+#responsive-navbar-nav {
+    margin: 10px;
+  }
+
+
+
+  // mobile 
+#custom {
+    .navbar-brand {
+      font-size: 1.25rem;
+    }
+    
+  }
+  #custom.navbar {
+      
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+// desktop
+@media only screen and (min-width: 600px) {
+  
+
+    #custom {
+      
+      .navbar-brand {
+        font-size: 2rem;
+      }
+  
+      .navbar-nav {
+        padding-left: 10px;
+      }
+    }
+    #custom.navbar {
+        
+      padding: 1rem 1.5rem;
+      font-size: 1.25rem;
+      text-align: left;
+    }
+  }
+  

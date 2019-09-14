@@ -1,0 +1,208 @@
+// (c) Surien Das-Giwojno
+
+import React, { Component } from 'react';
+import './css/App.scss';
+import Image from 'react-bootstrap/Image';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import CardDeck from 'react-bootstrap/CardDeck';
+//import TypeWriter from './TypeWriter';
+import MyNav from './Nav';
+import Particles from 'react-particles-js';
+import particleConfig from './particleConfig';
+import ScrollableAnchor from 'react-scrollable-anchor'
+import VisibilitySensor from 'react-visibility-sensor'
+
+
+
+const links = {
+  github: "https://github.com/suriendg",
+  linkedin: "https://www.linkedin.com/in/surien-das-giwojno/",
+  devpost: "https://devpost.com/SurienDG",
+  email: "mailto:surien.das-giwojno@uwaterloo.ca"
+}
+
+let myNav;
+let cardsElem;
+
+function Cards() {
+
+
+  return (
+
+
+    <CardDeck>
+      <Card id="custom" bg="dark" text="white">
+        <Card.Header><Card.Title>UOttaHacks</Card.Title></Card.Header>
+        <Card.Img id="cardImg" variant="top" src="uOttaHacks.jpg" />
+        <Card.Body>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the bulk of
+            the card's content.
+          </Card.Text>
+        </Card.Body>
+        <Card.Body>
+          <Card.Link href="#">Card Link</Card.Link>
+          <Card.Link href="#">Another Link</Card.Link>
+        </Card.Body>
+      </Card>
+      <Card bg="dark" text="white">
+        <Card.Header><Card.Title>Hack the North</Card.Title></Card.Header>
+        <Card.Img id="cardImg" variant="top" src="HackTheNorth.jpg" />
+        <Card.Body>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the bulk of
+            the card's content.
+</Card.Text>
+        </Card.Body>
+        <Card.Body>
+          <Card.Link href="#">Card Link</Card.Link>
+          <Card.Link href="#">Another Link</Card.Link>
+        </Card.Body>
+      </Card>
+      <Card bg="dark" text="white">
+        <Card.Header><Card.Title>Hack the North</Card.Title></Card.Header>
+        <Card.Img id="cardImg" variant="top" src="HackTheNorth.jpg" />
+        <Card.Body>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the bulk of
+            the card's content.
+</Card.Text>
+        </Card.Body>
+        <Card.Body>
+          <Card.Link href="#">Card Link</Card.Link>
+          <Card.Link href="#">Another Link</Card.Link>
+        </Card.Body>
+      </Card>
+
+
+
+    </CardDeck>)
+}
+
+
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { top: window.innerHeight / 2, bottom: window.innerHeight / 2 };
+  }
+  updateWindowOffset() {
+    this.setState({ top: window.innerHeight / 2, bottom: window.innerHeight / 2 });
+
+  }
+  componentDidMount() {
+
+    window.addEventListener('resize', this.updateWindowOffset.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowOffset.bind(this));
+  }
+
+  render() {
+    console.log("app rendered");
+    return (
+
+
+
+
+
+      <div className="App">
+
+        <MyNav ref={(navElement) => myNav = navElement} />
+
+        <div className="mainBackground">
+          <Particles className='particles'
+            params={particleConfig} />
+
+
+          <MainImage id="mainImage" src="ProfilePic.JPG" />
+          <span>You failed</span>
+          <Container>
+            <Row>
+              <Col>
+                <MediaImage src="GitHub.png" link={links.github} />
+                <MediaImage src="LinkedIn.png" link={links.linkedin} />
+                <MediaImage src="DevPost.png" link={links.devpost} />
+                <MediaImage src="email.png" link={links.email} />
+              </Col>
+            </Row>
+          </Container>
+        </div>
+
+
+
+
+
+        <VisibilitySensor partialVisibility offset={this.state} scrollDelay={0} scrollCheck={true} onChange={(isVisible) => {
+          isVisible ? myNav.makeActive("Statistics") : myNav.disactivate("Statistics");
+        }}>
+          <div id="StatisticsDiv">
+            {console.log(cardsElem ? cardsElem.offsetHeight : 0)}
+
+            <ScrollableAnchor id={'Statistics'}>
+              <h2>  Statistics </h2>
+            </ScrollableAnchor>
+
+            <div ref={(cardElement) => cardsElem = cardElement} >
+              <Cards />
+            </div>
+
+          </div>
+        </VisibilitySensor>
+
+
+        <VisibilitySensor partialVisibility offset={this.state} scrollDelay={0} scrollCheck={true} onChange={(isVisible) => {
+  
+          isVisible ? myNav.makeActive("GitHub_Commits_Chart") : myNav.disactivate("GitHub_Commits_Chart")
+        }}>
+          <div id="GitHub_Commits_ChartDiv">
+
+            <ScrollableAnchor id={'GitHub_Commits_Chart'}>
+              <h2>  GitHub Commits Chart </h2>
+            </ScrollableAnchor>
+
+            <Cards />
+
+          </div>
+        </VisibilitySensor>
+
+
+      </div>
+    );
+  }
+}
+
+
+class MainImage extends Component {
+  render() {
+    return (
+      <Container>
+        <Row>
+          <Col>
+            <Image src={this.props.src} id={this.props.id} roundedCircle />
+          </Col>
+        </Row>
+      </Container>
+    )
+  }
+}
+
+class MediaImage extends Component {
+  render() {
+    return (
+      <a
+        className="App-link"
+        href={this.props.link}
+        target="_blank"
+        rel="noopener noreferrer">
+
+        <Image src={this.props.src} id="mediaImage" roundedCircle />
+      </a>
+    )
+  }
+}
+export default App;

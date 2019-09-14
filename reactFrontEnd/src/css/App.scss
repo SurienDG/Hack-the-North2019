@@ -1,0 +1,169 @@
+
+
+.App {
+  text-align: center;
+ // overflow-x: hidden;
+    width: 100%;
+    
+ 
+}
+
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+#cardImg {
+  height: 45vh;
+ object-fit: scale-down
+ //height:100%;
+ }
+
+@media only screen and (max-width: 1024px) and (min-width: 500px) {
+
+
+#cardImg {
+ height: 20vh;
+object-fit: scale-down
+//height:100%;
+}
+}
+
+span {
+  font-size: calc(10px + 2vmin);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
+
+.bg-black {
+  background-color: black;
+}
+
+
+
+
+.mainBackground {
+  padding: 2%;
+  height: 100vmin;
+  color: white;
+  background-color: #282c34;
+}
+
+#StatisticsDiv {
+  padding: 2%;
+  height: 100%;
+  color: white;
+  background-color: blue;
+
+}
+#GitHub_Commits_ChartDiv {
+  padding: 2%;
+  height: 100%;
+  color: white;
+  background-color: black;
+
+}
+
+
+
+#mainImage {
+  border-style: solid;
+  border-color: white;
+  border-width: 1vmin;
+  height: 50vmin;
+  width: 50vmin;
+  -webkit-animation-name: spinner;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 20s;
+
+  animation-name: spinner;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 20s;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+#mediaImage {
+  border-style: solid;
+  border-color: black;
+  border-width: 1vmin;
+  height:   10vmin;
+  width: 10vmin;
+}
+
+#mediaImage:hover {
+  opacity: 0.75;
+}
+
+
+.particles {
+  position: fixed;
+  height: 65vmin;
+  width: 100%;
+  z-index: 0;
+
+}
+#mainImage:hover {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+
+
+.typing {
+  -webkit-animation: blink 0.7s infinite;
+  animation: blink 1s step-end infinite;
+  border-right: .15em solid white; /* The typwriter cursor */
+}
+
+
+
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: white; }
+}
+
+
+
+
+@keyframes spinner {
+  from {
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  }
+  to {
+    -moz-transform: rotateY(-360deg);
+    -ms-transform: rotateY(-360deg);
+    transform: rotateY(-360deg);
+  }
+}
+
+/* WebKit and Opera browsers */
+@-webkit-keyframes spinner {
+  from { -webkit-transform: rotateY(0deg);    }
+  to   { -webkit-transform: rotateY(-360deg); }
+}
