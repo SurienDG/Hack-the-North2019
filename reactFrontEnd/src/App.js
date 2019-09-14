@@ -12,8 +12,12 @@ import CardDeck from 'react-bootstrap/CardDeck';
 import MyNav from './Nav';
 import Particles from 'react-particles-js';
 import particleConfig from './particleConfig';
-import ScrollableAnchor from 'react-scrollable-anchor'
-import VisibilitySensor from 'react-visibility-sensor'
+import ScrollableAnchor from 'react-scrollable-anchor';
+import VisibilitySensor from 'react-visibility-sensor';
+import axios from 'axios';
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
+
 
 
 
@@ -23,6 +27,8 @@ const links = {
   okay: "",
   good: ""
 }
+
+const baseURL = "http://localhost:2525/"
 
 let myNav;
 let cardsElem;
@@ -89,6 +95,22 @@ class App extends Component {
     super(props);
     this.state = { top: window.innerHeight / 2, bottom: window.innerHeight / 2 };
   }
+
+  handleUserUpdate(event){
+    if (event.key === 'Enter'){
+      this.updatePhoto(event.target.value);
+
+    }
+  }
+
+  updatePhoto(username) {
+  
+      axios.get(baseURL + "avatar/" + username);
+    
+    
+    //this.setState({});
+  }
+
   updateWindowOffset() {
     this.setState({ top: window.innerHeight / 2, bottom: window.innerHeight / 2 });
 
@@ -118,8 +140,20 @@ class App extends Component {
           <Particles className='particles'
             params={particleConfig} />
 
+          
 
           <MainImage id="mainImage" src="githubProfile.png" />
+          <InputGroup className="mb-3" id = "inputBar">
+            <InputGroup.Prepend>
+              <InputGroup.Text id="input">Default</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+            id = "inputBar"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              onKeyDown={this.updatePhoto}
+            />
+          </InputGroup>
           <span>Your coding style is very good!</span>
           <Container>
             <Row>
@@ -156,7 +190,7 @@ class App extends Component {
 
 
         <VisibilitySensor partialVisibility offset={this.state} scrollDelay={0} scrollCheck={true} onChange={(isVisible) => {
-  
+
           isVisible ? myNav.makeActive("GitHub_Commits_Chart") : myNav.disactivate("GitHub_Commits_Chart")
         }}>
           <div id="GitHub_Commits_ChartDiv">
