@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 
 
-app.get("/stats/repolist/:user", (req, res) => {
+//app.get("/stats/repolist/:user", (req, res) => {
 
 /*
 app.get("/stats/composition/:user", async function (req, res) {
