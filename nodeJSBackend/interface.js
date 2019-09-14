@@ -1,5 +1,5 @@
 const request = require('request-promise');
-require('dotenv').config()
+require('dotenv').config();
 
 exports.get = function (url) {
 
@@ -14,7 +14,7 @@ exports.get = function (url) {
             client_secret: process.env.client_secret
         }
     };
-    
+
     return new Promise((resolve, reject) => {
         request(options)
             .then(response => {
