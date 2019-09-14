@@ -17,6 +17,13 @@ import VisibilitySensor from 'react-visibility-sensor'
 
 
 
+const links = {
+  terrible: "",
+  bad: "",
+  okay: "",
+  good: ""
+}
+
 let myNav;
 let cardsElem;
 
@@ -117,10 +124,10 @@ class App extends Component {
           <Container>
             <Row>
               <Col>
-                <MediaImage src="GitHub.png" link={links.github} />
-                <MediaImage src="LinkedIn.png" link={links.linkedin} />
-                <MediaImage src="DevPost.png" link={links.devpost} />
-                <MediaImage src="email.png" link={links.email} />
+                <MediaImage src="GitHub.png" link={links.terrible} />
+                <MediaImage src="LinkedIn.png" link={links.bad} />
+                <MediaImage src="DevPost.png" link={links.okay} />
+                <MediaImage src="email.png" link={links.good} />
               </Col>
             </Row>
           </Container>
