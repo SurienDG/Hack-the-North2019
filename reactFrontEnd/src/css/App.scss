@@ -59,11 +59,17 @@ span {
 
 
 
+
 .mainBackground {
   padding: 2%;
   height: 100vmin;
   color: white;
   background-color: #282c34;
+}
+
+#inputBar {
+  flex: 0.5 1 auto;
+  align-content: center;
 }
 
 #StatisticsDiv {
