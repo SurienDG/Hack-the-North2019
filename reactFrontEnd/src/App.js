@@ -120,14 +120,14 @@ class App extends Component {
 
 
           <MainImage id="mainImage" src="githubProfile.png" />
-          <span>You failed</span>
+          <span>Your coding style is very good!</span>
           <Container>
             <Row>
               <Col>
-                <MediaImage src="GitHub.png" link={links.terrible} />
-                <MediaImage src="LinkedIn.png" link={links.bad} />
-                <MediaImage src="DevPost.png" link={links.okay} />
-                <MediaImage src="email.png" link={links.good} />
+                <MediaImage src="greenCircle.png" link={links.terrible} />
+                <MediaImage src="greenCircle.png" link={links.bad} />
+                <MediaImage src="greenCircle.png" link={links.okay} />
+                <MediaImage src="greenCircle.png" link={links.good} />
               </Col>
             </Row>
           </Container>
