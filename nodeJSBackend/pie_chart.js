@@ -24,8 +24,6 @@ exports.piechart = function (username) {
                             total[j] += json[j]
                         }
                     }
-
-                    console.log(total)
                     resolve(total)
                   });
             })
