@@ -21,27 +21,53 @@ const renderCustomizedLabel = ({
   );
 };
 
-const data = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-  ];
+
 
 export default class Chart extends PureComponent {
+  constructor(props){
+    super(props);
+    this.state = {data: [], name: "suriendg"
+  };
+} 
+  
+  componentDidMount(){
+  //   this.setState((state,props) => {
+  //     state.data.push({ name: 'asdaf', value: 300 });
+  //     return state;
+  //   // $.getJSON(`http://localhost:2525/stats/piechart/${state.name}`, (json) => {        
+  //   //     for (const key in json) {
+          
+  //   //         state.data.push({name: key, value: json[key]});
+  //   //     }
+  //   //     console.log(state);
     
+  //   // });});
+  // });
+  this.setState((state) => {
+    let data = state.data;
+
+    
+    
+    $.getJSON(`http://localhost:2525/stats/piechart/${state.name}`, (json) => {        
+       for (const key in json) {
+          
+           data.push({name: key, value: json[key]});
+      }
+      this.setState(data);
+    
+    
+  });
+  })
+}
+  
+  
   render() {
-    console.log("test start")
-
-    let name = "haoy2001";
-    $.getJSON('http://localhost:2525/stats/piechart/Miguel-Caringal', function(data) {        
-        console.log(data);
-    });
-
+    console.log(this.state.data)
     return (
+      
       <PieChart width={400} height={400}>
         <Pie
-          data={data}
+          data={this.state.data}
           cx={200}
           cy={200}
           labelLine={false}
@@ -51,7 +77,7 @@ export default class Chart extends PureComponent {
           dataKey="value"
         >
           {
-            data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+            this.state.data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
           }
         </Pie>
       </PieChart>
