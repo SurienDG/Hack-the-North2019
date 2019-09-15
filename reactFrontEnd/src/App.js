@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 import Chart from './Chart';
+import Graph from './Graph';
 //import TypeWriter from './TypeWriter';
 import MyNav from './Nav';
 import Particles from 'react-particles-js';
@@ -250,9 +251,7 @@ class App extends Component {
               <h2>  Statistics </h2>
             </ScrollableAnchor>
 
-          
-              <Cards />
-
+              <Chart/>
 
           </div>
         </VisibilitySensor>
@@ -273,7 +272,8 @@ class App extends Component {
           </div>
         </VisibilitySensor>
 
-        <Chart/>
+        
+        {/* <Graph/> */}
       </div>
     );
   }
