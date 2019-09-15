@@ -98,6 +98,7 @@ exports.downloadtwo = function (currobj) {
                 }
                 console.log("final metrics is...");
                 console.log(sendMetrics);
+                console.log("FINISH")
                 fsExtra.emptyDirSync(__dirname+"/downloadedfiles")
                 
             
