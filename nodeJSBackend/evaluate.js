@@ -1,3 +1,13 @@
+function parseCCmetric(cc_score) {
+
+    if (cc_score <=5) { return 'A'; }
+    else if (cc_score <= 10) { return 'B'; }
+    else if (cc_score <= 20) { return 'C'; }
+    else if (cc_score <= 30) {return 'D';}
+    else if (cc_score <= 40) {return 'E';}
+    else { return 'F'; }
+}
+
 var metricNames = ["difficulty", "effort", "average_mi", "mi_files", "LOC", "LLOC", "Comments", "Average complexity", "hal_metrics", "cc_metrics", "raw_metrics"];
 var hal_metrics_prop = ["difficulty", "effort", "bugs"]
 var raw_metrics_prop = ["LOC", "LLOC", "Comments"]
@@ -112,11 +122,11 @@ let execSync3 = (filepath) => {
                     //console.log(sum);
                 }
                 //console.log(sum);
-                allMetrics["cc_metrics"][funcArray] = sum/(Object.keys(funcArray).length);
+                allMetrics["cc_metrics"][funcArray] = parseCCmetric(sum/(Object.keys(funcArray).length));
                 sum = 0;
 
             }
-            allMetrics["Average complexity"] = regExp.exec(outarr[outarr.length - 2])[1];
+            allMetrics["Average complexity"] = parseCCmetric(regExp.exec(outarr[outarr.length - 2])[1]);
             resolve(allMetrics);
         });
     });

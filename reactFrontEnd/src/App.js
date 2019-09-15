@@ -97,7 +97,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { top: window.innerHeight / 2, bottom: window.innerHeight / 2, name: "Miguel-Caringal", data:[]};
+    this.state = { top: window.innerHeight / 2, bottom: window.innerHeight / 2 , cyclo:"yellowcircle.png", maint:"yellowcircle.png", hal: "", raw:"", data:[]};
   }
 
   handleUserUpdate(event){
@@ -117,6 +117,7 @@ class App extends Component {
         });
       })
 
+      this.updateScales(event.target.value);
     }
   }
 
@@ -133,7 +134,46 @@ class App extends Component {
         })
     
     
-    //this.setState({});
+    
+  }
+
+  updateScales(username){
+    axios.get(baseURL + "/download/repolist/" + username).then(res => {
+      console.log(res.data);
+      console.log(res.data)
+      console.log(res.data["average_mi"])
+      console.log(typeof(res.data))
+      
+      if (res.data["Average complexity"]=="A"){
+        this.setState({cyclo: "greenCircle.png"});
+      }
+      else if (res.data["Average complexity"]=="B"){
+        this.setState({cyclo: "yellowcircle.png"});
+      }
+      else if (res.data["Average complexity"]=="C"){
+        this.setState({cyclo: "yellowcircle.png"});
+      }
+      else{
+        this.setState({cyclo: "redcircle.png"});
+      }
+
+      if (res.data["average_mi"]=="A"){
+        this.setState({maint: "greenCircle.png"});
+      }
+      if (res.data["average_mi"]=="B"){
+        this.setState({maint: "yellowcircle.png"});
+      }
+      if (res.data["average_mi"]=="C"){
+        this.setState({maint: "yellowcircle.png"});
+      }
+      else{
+        this.setState({maint: "redcircle.png"});
+      }
+    }).catch(error =>
+      {
+        Popup.alert('User not found');
+        
+      })
   }
 
   updateWindowOffset() {
@@ -190,11 +230,24 @@ class App extends Component {
           <Container>
             <Row>
               <Col>
-                <MediaImage src="greenCircle.png" link={links.terrible} />
-                <MediaImage src="greenCircle.png" link={links.bad} />
-                <MediaImage src="greenCircle.png" link={links.okay} />
-                <MediaImage src="greenCircle.png" link={links.good} />
+                <MediaImage src={this.state.maint} link={links.terrible} />
+                <p>Maintainability Index</p>
               </Col>
+              <Col>
+                <MediaImage src={this.state.cyclo} link={links.bad} />
+                <p>Cyclomatic Complexity</p>
+              </Col>
+              {/*
+              <Col>
+                <MediaImage src={this.state.raw}link={links.okay} />
+                <p>Raw Metrics</p>
+              </Col>
+              <Col>
+                <MediaImage src={this.state.hal} link={links.good} />
+                <p>Halstead Metrics</p>
+              </Col>
+              */}
+              
             </Row>
           </Container>
         </div>

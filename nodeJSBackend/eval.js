@@ -1,3 +1,13 @@
+function parseCCmetric(cc_score) {
+
+    if (cc_score <=5) { return 'A'; }
+    else if (cc_score <= 10) { return 'B'; }
+    else if (cc_score <= 20) { return 'C'; }
+    else if (cc_score <= 30) {return 'D';}
+    else if (cc_score <= 40) {return 'E';}
+    else { return 'F'; }
+}
+
 function evaluate(filepath) {
     const { exec } = require('child_process');
 
