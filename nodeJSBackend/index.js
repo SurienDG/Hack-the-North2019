@@ -32,6 +32,8 @@ app.get("/stats/composition/:user", async function (req, res) {
 })
 */
 
+
+// Downloads all files from a repository
 app.get("/stats/composition/:owner/:repo/:tree_sha", async function (req, res) {
 
     owner = req.params.owner;
@@ -67,7 +69,7 @@ app.get("/stats/composition/:owner/:repo/:tree_sha", async function (req, res) {
         })
 })
 
-// This one gets the branch tree Sha which you need to recursively call the tree
+// gets tree_sha
 app.get("/shabranch/:owner/:repo/:branch", async function (req, res) {
     owner = req.params.owner;
     repo = req.params.repo;
