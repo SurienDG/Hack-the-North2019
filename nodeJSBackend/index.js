@@ -5,6 +5,7 @@ const port = 2525
 const https = require('https');
 const fs = require('fs');
 const pie_chart = require('./pie_chart')
+const download_repos = require('./download')
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
@@ -15,39 +16,73 @@ app.use(function(req, res, next) {
 
 //app.get("/stats/repolist/:user", (req, res) => {
 
-/*
-app.get("/stats/composition/:user", async function (req, res) {
 
+app.get("/download/repolist/:user", async function (req, res) {
+    download_repos.download(req.params.user)
+    .then((sha_list) => {
+        download_repos.downloadtwo(sha_list);
+        res.send((sha_list))
+    }).catch(err => {
+        console.error(err.message)
+    });
+})
+
+/*
+app.get("/download/repolist/:user", async function (req, res) {
     user = req.params.user;
+    branch = "master";
+    repolist = [];
+    sha_list = [];
     github_api.get(`/users/${user}/repos`)
         .then(function (response) {
-            data_back = "";
             JSON.parse(response).forEach(i => {
-                data_back += (i["name"]);
-                data_back += "<br>";
+                repolist.push(i["name"]);
             });
-            data_back += req.path
-            res.send(data_back)
+            for (var i = 0; i<= repolist.length; i++){
+                github_api.get(`/repos/${user}/${repolist[i]}/branches/${branch}`)
+                .then(function (response) {
+                    parsed = JSON.parse (response)
+                    tree_sha = (parsed["commit"]["commit"]["tree"]["sha"])
+                    sha_list.push(tree_sha);
+                    console.log(sha_list);
+                    //console.log(tree_sha)
+                }).catch(function name(err) {
+                    console.error(err.message);
+                })
+            };
+            //console.log(sha_list)
+            res.send(repolist)
+            //console.log(repolist)
+
         }).catch(function name(err) {
             console.error("Not good")
             console.error(err)
         })
+    
 })
 */
 
-app.get("/stats/composition/:owner/:repo/:tree_sha", async function (req, res) {
 
-    owner = req.params.owner;
+
+/*
+// Downloads all files from a repository
+app.get("/download/allfiles/:user/:repo/:tree_sha", async function (req, res) {
+
+    user = req.params.user;
     repo = req.params.repo;
     tree_sha = req.params.tree_sha
+    promise_list = []
 
-    console.log(owner)
+    for (i = 0; i<tree_sha.length;i++){
+        promise_list.push(github_api.get(`/repos/${user}/${repo}/git/trees/${tree_sha}?recursive=1`))
+    }
+
+    console.log(user)
     //path = req.params.path;
-    //github_api.get(`/users/${user}/repos`)
-    github_api.get(`/repos/${owner}/${repo}/git/trees/${tree_sha}?recursive=1`)
+    github_api.get(`/repos/${user}/${repo}/git/trees/${tree_sha}?recursive=1`)
         .then(function (response) {
             var patharray = []
-            data_back = ""
+            //data_back = ""
             parsed = JSON.parse(response);
             treeparsed =(parsed["tree"])
             const keys = Object.values(treeparsed)
@@ -56,7 +91,7 @@ app.get("/stats/composition/:owner/:repo/:tree_sha", async function (req, res) {
                     filename = key["path"].split("/")
                     filename = filename[filename.length-1]
                     const file = fs.createWriteStream(__dirname+"/downloadedfiles/"+filename);
-                    const request = https.get("https://raw.githubusercontent.com/"+owner+"/"+repo+"/master/"+key["path"], function(response) {
+                    const request = https.get("https://raw.githubusercontent.com/"+user+"/"+repo+"/master/"+key["path"], function(response) {
                     response.pipe(file);
                     });
                 }
@@ -69,15 +104,15 @@ app.get("/stats/composition/:owner/:repo/:tree_sha", async function (req, res) {
             console.error(err)
         })
 })
+*/
 
-// This one gets the branch tree Sha which you need to recursively call the tree
-app.get("/shabranch/:owner/:repo/:branch", async function (req, res) {
-    owner = req.params.owner;
+
+/*
+// gets tree_sha
+app.get("/shabranch/:user/:repo/:branch", async function (req, res) {
+    user = req.params.user;
     repo = req.params.repo;
-    branch = req.params.branch;
-    //path = req.params.path;
-    //github_api.get(`/users/${user}/repos`)
-    github_api.get(`/repos/${owner}/${repo}/branches/${branch}`)
+    github_api.get(`/repos/${user}/${repo}/branches/${branch}`)
         .then(function (response) {
             parsed = JSON.parse (response)
             tree_sha = (parsed["commit"]["commit"]["tree"]["sha"])
@@ -86,6 +121,7 @@ app.get("/shabranch/:owner/:repo/:branch", async function (req, res) {
             console.error(err.message);
         })
 });
+*/
 
 app.get("/stats/piechart/:user", (req, res) => {
     pie_chart.piechart(req.params.user)
