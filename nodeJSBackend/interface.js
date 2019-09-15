@@ -21,7 +21,6 @@ exports.get = function (url) {
                 resolve(response);
             })
             .catch(err => {
-                reject(err);
             })
     });
 }
