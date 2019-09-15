@@ -92,7 +92,7 @@ class MyNav extends Component {
       <div className="sticky-top" ref={(divElement) => this.divElement = divElement}>
         <Navbar collapseOnSelect={true} id="custom" expand="lg" bg="black" variant="dark" sticky="top" >
           <Navbar.Brand id="custom" href="#home" onClick={goToTop}>
-            {'Github Evaluator'}
+            {'GitHubHub'}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

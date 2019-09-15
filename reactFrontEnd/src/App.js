@@ -275,7 +275,7 @@ class App extends Component {
               <h2>  GitHub Commits Chart </h2>
             </ScrollableAnchor>
 
-            <Cards />
+            <Graph></Graph>
 
           </div>
         </VisibilitySensor>

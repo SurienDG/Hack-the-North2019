@@ -33,12 +33,12 @@ export default class Chart extends PureComponent {
   render() {
     //console.log(this.props.data);
     return (
-      <PieChart width={1920} height={800}>
+      <PieChart width={1400} height={800}>
         <Pie
           dataKey="value"
           isAnimationActive={false}
           data={this.props.data}
-          cx={810}
+          cx={800}
           cy={400}
           outerRadius={300}
           fill="#8884d8"
