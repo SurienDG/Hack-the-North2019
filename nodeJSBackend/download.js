@@ -1,6 +1,11 @@
 const github_api = require('./interface');
 const fs = require('fs');
 const https = require('https');
+let evaluate = require ('./evaluate')
+var metricNames = ["difficulty", "effort", "average_mi", "mi_files", "LOC", "LLOC", "Comments", "Average complexity", "hal_metrics", "cc_metrics", "raw_metrics"];
+var hal_metrics_prop = ["difficulty", "effort", "bugs"]
+var raw_metrics_prop = ["LOC", "LLOC", "Comments"]
+var allMetrics = {};
 
 exports.download = function (username) {
     return new Promise((resolve, reject) => {
@@ -80,7 +85,22 @@ exports.downloadtwo = function (currobj) {
                 //console.log(key["path"])
                 //patharray.push(key["path"])
             }
-            } 
+            }
+            evaluate.analyseFolderFiles(__dirname+"/downloadedfiles").then((usefulMetrics) =>{
+                //console.log(usefulMetrics[usefulMetrics.length-1]); //allMetrics will actually have allMetrics as in each version (have to make diff for each~)
+                let finalMetrics = usefulMetrics[usefulMetrics.length-1];
+                var sendMetrics = {}
+                for(var tag in finalMetrics) {
+                    if (metricNames.includes(tag)) {
+                        sendMetrics[tag] = finalMetrics[tag];
+                    }
+                }
+                console.log("final metrics is...");
+                console.log(sendMetrics);
+            
+             }).catch((err) => {
+                 console.log("gtest");
+             });
             //console.log(sha_list)
             let returnobject = {}
             returnobject.sha_list = sha_list;

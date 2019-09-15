@@ -21,7 +21,7 @@ app.get("/download/repolist/:user", async function (req, res) {
     download_repos.download(req.params.user)
     .then((sha_list) => {
         download_repos.downloadtwo(sha_list);
-        res.send((sha_list))
+        //res.send((sha_list))
     }).catch(err => {
         console.error(err.message)
     });
@@ -126,7 +126,7 @@ app.get("/shabranch/:user/:repo/:branch", async function (req, res) {
 app.get("/stats/piechart/:user", (req, res) => {
     pie_chart.piechart(req.params.user)
     .then((pie) => {
-        res.send((pie))
+        //res.send((pie))
     }).catch(err => {
         console.error(err.message)
     });
