@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000/");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     next();
 });
 
@@ -100,6 +100,8 @@ app.get("/avatar/:user", (req, res) => {
     github_api.get(`/users/${req.params.user}`).then((response) => {
         let responseParse = JSON.parse(response);
         res.json(responseParse.avatar_url);
+    }).catch(err => {
+       res.json(404, "User doesn't exist") 
     })
 });
 
