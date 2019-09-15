@@ -20,6 +20,7 @@ import axios from 'axios';
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl';
 import Popup from 'react-popup';
+import $ from 'jquery';
 
 
 
@@ -96,12 +97,25 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { top: window.innerHeight / 2, bottom: window.innerHeight / 2 };
+    this.state = { top: window.innerHeight / 2, bottom: window.innerHeight / 2, name: "Miguel-Caringal", data:[]};
   }
 
   handleUserUpdate(event){
     if (event.key === 'Enter'){
       this.updatePhoto(event.target.value);
+      let username = event.target.value;
+
+      this.setState((state) => {
+        let data = [];
+        $.getJSON(`http://localhost:2525/stats/piechart/${username}`, (json) => {
+          for (const key in json) {
+            data.push({ name: key, value: json[key] });
+          }
+          data = data.sort((a, b) => (a.value > b.value) ? 1 : -1)
+          // console.log(data)
+          this.setState({data});
+        });
+      })
 
     }
   }
@@ -111,7 +125,7 @@ class App extends Component {
 
       axios.get(baseURL + "/avatar/" + username).then(res => {
         console.log(res.data);
-        this.setState({profilePic: res.data});
+        this.setState({profilePic: res.data, name: username});
       }).catch(error =>
         {
           Popup.alert('User not found');
@@ -199,8 +213,8 @@ class App extends Component {
               <h2>  Statistics </h2>
             </ScrollableAnchor>
 
-              <Chart/>
-
+              <Chart data={this.state.data}/>
+            
           </div>
         </VisibilitySensor>
 
