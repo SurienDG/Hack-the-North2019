@@ -20,9 +20,11 @@ app.use(function(req, res, next) {
 app.get("/download/repolist/:user", async function (req, res) {
     download_repos.download(req.params.user)
     .then((sha_list) => {
-        download_repos.downloadtwo(sha_list);
-        //res.send((sha_list))
-        res.json(sha_list);
+        download_repos.downloadtwo(sha_list).then((returnvalue) => {
+            res.json(returnvalue);
+        }
+
+        );
     }).catch(err => {
         console.error(err.message)
     });
