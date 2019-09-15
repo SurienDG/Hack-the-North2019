@@ -17,7 +17,8 @@ import ScrollableAnchor from 'react-scrollable-anchor';
 import VisibilitySensor from 'react-visibility-sensor';
 import axios from 'axios';
 import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
+import FormControl from 'react-bootstrap/FormControl';
+import Popup from 'react-popup';
 
 
 
@@ -29,10 +30,10 @@ const links = {
   good: ""
 }
 
-const baseURL = "http://localhost:2525/"
+const baseURL = "http://localhost:2525"
 
 let myNav;
-let cardsElem;
+//let cardsElem;
 
 function Cards() {
 
@@ -107,9 +108,14 @@ class App extends Component {
   updatePhoto(username) {
   
 
-      axios.get(baseURL + "avatar/" + username).then(res => {
-        console.log(res);
-      })
+      axios.get(baseURL + "/avatar/" + username).then(res => {
+        console.log(res.data);
+        this.setState({profilePic: res.data});
+      }).catch(error =>
+        {
+          Popup.alert('User not found');
+          
+        })
     
     
     //this.setState({});
@@ -120,7 +126,6 @@ class App extends Component {
 
   }
   componentDidMount() {
-
     window.addEventListener('resize', this.updateWindowOffset.bind(this));
   }
 
@@ -132,11 +137,12 @@ class App extends Component {
     console.log("app rendered");
     return (
 
-
+     
 
 
 
       <div className="App">
+         <Popup />
 
         <MyNav ref={(navElement) => myNav = navElement} />
 
@@ -146,10 +152,12 @@ class App extends Component {
 
           
 
-          <MainImage id="mainImage" src="githubProfile.png" />
-          <InputGroup className="mb-3" id = "inputBar">
+          <MainImage id="mainImage" src={this.state.profilePic} />
+          
+          <Container id = "inputBar">
+          <InputGroup className="mb-3" >
             <InputGroup.Prepend>
-              <InputGroup.Text id="input">Default</InputGroup.Text>
+              <InputGroup.Text id="input">GitHub Username</InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
             id = "inputBar"
@@ -158,6 +166,11 @@ class App extends Component {
               onKeyDown={this.handleUserUpdate.bind(this)}
             />
           </InputGroup>
+      
+          </Container>
+   
+          
+          
           <span>Your coding style is very good!</span>
           <Container>
             <Row>
@@ -185,9 +198,9 @@ class App extends Component {
               <h2>  Statistics </h2>
             </ScrollableAnchor>
 
-            <div ref={(cardElement) => cardsElem = cardElement} >
+          
               <Cards />
-            </div>
+
 
           </div>
         </VisibilitySensor>
