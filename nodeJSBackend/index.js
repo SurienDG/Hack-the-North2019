@@ -96,6 +96,15 @@ app.get("/stats/piechart/:user", (req, res) => {
     });
 });
 
+app.get("/stats/commits/:user", (req, res) => {
+    pie_chart.commit(req.params.user)
+    .then((commits) => {
+        res.send(JSON.stringify(commits))
+    }).catch(err => {
+        console.error(err.message)
+    });
+});
+
 app.get("/avatar/:user", (req, res) => {
     github_api.get(`/users/${req.params.user}`).then((response) => {
         let responseParse = JSON.parse(response);
