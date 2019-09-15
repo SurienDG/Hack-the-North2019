@@ -33,7 +33,7 @@ app.get("/download/repolist/:user", async function (req, res) {
 app.get("/stats/piechart/:user", (req, res) => {
     pie_chart.piechart(req.params.user)
     .then((pie) => {
-        //res.send((pie))
+        res.send((pie))
     }).catch(err => {
         console.error(err.message)
     });

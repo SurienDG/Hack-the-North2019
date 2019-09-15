@@ -199,9 +199,7 @@ class App extends Component {
               <h2>  Statistics </h2>
             </ScrollableAnchor>
 
-          
-              <Cards />
-
+              <Chart/>
 
           </div>
         </VisibilitySensor>
@@ -222,8 +220,8 @@ class App extends Component {
           </div>
         </VisibilitySensor>
 
-        <Chart/>
-        <Graph/>
+        
+        {/* <Graph/> */}
       </div>
     );
   }

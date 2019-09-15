@@ -6,6 +6,12 @@ import {
 
 const COLORS = ['#dd44a8', '#3a87c1', '#454fbc', '#992f2f', '#c13a43', '#bc7745', '#bcc65d', '#44ddc6', '#2f6499', '#9c5dc6'];
 
+const dataaa = [
+  { name: 'Group A', value: 2400 }, { name: 'Group B', value: 4567 },
+  { name: 'Group C', value: 1398 }, { name: 'Group D', value: 9800 },
+  { name: 'Group E', value: 3908 }, { name: 'Group F', value: 4800 },
+];
+
 export default class Chart extends PureComponent {
 
   constructor(props) {
@@ -30,15 +36,16 @@ export default class Chart extends PureComponent {
   }
 
   render() {
+    console.log(this.state.data)
     return (
-      <PieChart width={600} height={600}>
+      <PieChart width={1920} height={800}>
         <Pie
           dataKey="value"
           isAnimationActive={false}
-          data={this.state.data}
-          cx={400}
+          data={this.state.data.slice(0, 9)}
+          cx={810}
           cy={400}
-          outerRadius={180}
+          outerRadius={300}
           fill="#8884d8"
           >
           {
