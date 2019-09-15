@@ -208,7 +208,7 @@ class App extends Component {
           
 
           <MainImage id="mainImage" src={this.state.profilePic} />
-          
+          <br></br>
           <Container id = "inputBar">
           <InputGroup className="mb-3" >
             <InputGroup.Prepend>
@@ -221,13 +221,6 @@ class App extends Component {
               onKeyDown={this.handleUserUpdate.bind(this)}
             />
           </InputGroup>
-      
-          </Container>
-   
-          
-          
-          <span>Your coding style is very good!</span>
-          <Container>
             <Row>
               <Col>
                 <MediaImage src={this.state.maint} link={links.terrible} />

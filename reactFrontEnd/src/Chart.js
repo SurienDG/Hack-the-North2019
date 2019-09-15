@@ -37,7 +37,7 @@ export default class Chart extends PureComponent {
         <Pie
           dataKey="value"
           isAnimationActive={false}
-          data={this.props.data.slice(0, 9)}
+          data={this.props.data}
           cx={810}
           cy={400}
           outerRadius={300}
@@ -48,7 +48,7 @@ export default class Chart extends PureComponent {
           }
         </Pie>
         <Tooltip formatter={function (a) {
-          return a;
+          return ""
         }}/>
       </PieChart>
     );
