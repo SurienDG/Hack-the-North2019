@@ -6,6 +6,7 @@ var metricNames = ["difficulty", "effort", "average_mi", "mi_files", "LOC", "LLO
 var hal_metrics_prop = ["difficulty", "effort", "bugs"]
 var raw_metrics_prop = ["LOC", "LLOC", "Comments"]
 var allMetrics = {};
+const fsExtra = require('fs-extra')
 
 exports.download = function (username) {
     return new Promise((resolve, reject) => {
@@ -97,6 +98,8 @@ exports.downloadtwo = function (currobj) {
                 }
                 console.log("final metrics is...");
                 console.log(sendMetrics);
+                fsExtra.emptyDirSync(__dirname+"/downloadedfiles")
+                
             
              }).catch((err) => {
                  console.log("gtest");
