@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
+import Chart from './Chart';
 //import TypeWriter from './TypeWriter';
 import MyNav from './Nav';
 import Particles from 'react-particles-js';
@@ -105,7 +106,10 @@ class App extends Component {
 
   updatePhoto(username) {
   
-      axios.get(baseURL + "avatar/" + username);
+
+      axios.get(baseURL + "avatar/" + username).then(res => {
+        console.log(res);
+      })
     
     
     //this.setState({});
@@ -151,7 +155,7 @@ class App extends Component {
             id = "inputBar"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
-              onKeyDown={this.updatePhoto}
+              onKeyDown={this.handleUserUpdate.bind(this)}
             />
           </InputGroup>
           <span>Your coding style is very good!</span>
@@ -175,7 +179,7 @@ class App extends Component {
           isVisible ? myNav.makeActive("Statistics") : myNav.disactivate("Statistics");
         }}>
           <div id="StatisticsDiv">
-            {console.log(cardsElem ? cardsElem.offsetHeight : 0)}
+            {/*console.log(cardsElem ? cardsElem.offsetHeight : 0)*/}
 
             <ScrollableAnchor id={'Statistics'}>
               <h2>  Statistics </h2>
@@ -204,7 +208,7 @@ class App extends Component {
           </div>
         </VisibilitySensor>
 
-
+        <Chart/>
       </div>
     );
   }
