@@ -91,7 +91,7 @@ let execSync3 = (filepath) => {
             var outarr = stdout.split("\n");
             fileMetricsPerFunc = parseFileProp(outarr.slice(0, outarr.length-3));
             allMetrics["cc_metrics"] = fileMetricsPerFunc;
-            console.log(fileMetricsPerFunc);
+            //console.log(fileMetricsPerFunc);
             var regExp = /\(([^)]+)\)/;
             const values = Object.values(fileMetricsPerFunc);
             const filesNames = Object.keys(fileMetricsPerFunc);
@@ -168,7 +168,7 @@ let execSync4 = (filepath) => {
             allMetrics["average_mi"] = letterGrade;
             allMetrics["mi_files"] = mimetrics;
             resolve(allMetrics);
-
+            
         });
     });
 }
