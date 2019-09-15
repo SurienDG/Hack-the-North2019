@@ -1,16 +1,12 @@
-string = str(input())
+# Problem J5
+import copy
 
-valid = True
+teams = 4
+t = int(input()) # Favorite Team
+g = int(input()) # Number of games already played [Team A, Team B, Score of A, Score of B]
 
-for i in range(len(string)):
-  if string[i] not in ['I','O','S','H','Z','X','N']:
-    valid = False
-
-if valid:
-  print("YES")
-else:
-  print("NO")
-
+# Add input
+games = []
 gamesLeft = [{1, 2}, {1, 3}, {1, 4}, {2, 3}, {3, 4}]
 for i in range(g):
   games.append(list(map(int, str(input()).split(" "))))

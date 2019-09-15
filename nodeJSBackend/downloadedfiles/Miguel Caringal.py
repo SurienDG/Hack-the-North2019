@@ -1,18 +1,19 @@
-month= int(input())
-day= int(input())
+#Miguel Caringal
+#Python Solution to Week 3 Medium Problem
+arraylength= int(input())
 
-if month > 2:
-    print ('After')
-else:
-    if month == 2:
-        if day == 18:
-            print ('Special')
-        elif day <18:
-            print ('Before')
-        else:
-            print ('After')
-    else:
-        print ('Before')            for a in range(0,zeroarray):
+array = []
+zeroarray = 0
+newarray = []
+
+for index in range(0,arraylength):
+    array.append(input())
+
+for index in array:
+    #print (newarray)
+    if index != '0':
+        if zeroarray !=0:
+            for a in range(0,zeroarray):
                 newarray.pop()
             zeroarray = 0
             #print (index)
