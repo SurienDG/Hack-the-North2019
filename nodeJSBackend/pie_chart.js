@@ -1,4 +1,6 @@
 const github_api = require('./interface');
+const request = require('request-promise');
+const cheerio = require('cheerio');
 
 exports.piechart = function (username) {
 
@@ -24,8 +26,6 @@ exports.piechart = function (username) {
                             total[j] += json[j]
                         }
                     }
-
-                    console.log(total)
                     resolve(total)
                   });
             })
@@ -33,4 +33,28 @@ exports.piechart = function (username) {
                 console.error(err.message);
             })
     });
+}
+
+exports.commit = function (username) {
+    var options = {
+        url: `https://github.com/${username}`,
+    };
+    
+    return new Promise((resolve, reject) => {
+        request(options)
+        .then(response => {
+            var $ = cheerio.load(response);
+            var container = $('rect.day')
+            var data = [];
+    
+            for (let i = 0; i < container.length; i++) {
+                data.push({date: container[i]["attribs"]["data-date"], value: container[i]["attribs"]["data-count"]})
+            }
+            
+            resolve(data);
+        })
+        // .catch(err => {
+        //     reject(err);
+        // })
+    })
 }
