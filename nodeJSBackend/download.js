@@ -13,7 +13,7 @@ exports.download = function (username) {
         branch = "master";
         repolist = [];
         sha_list = [];
-        console.log("once") 
+        //console.log("once") 
         github_api.get(`/users/${username}/repos`)
             .then(function (response) {
                 promise_list = []
@@ -35,7 +35,7 @@ exports.download = function (username) {
                     tree_sha = (parsed["commit"]["commit"]["tree"]["sha"])
                     sha_list.push(tree_sha);
                 } 
-                console.log(sha_list)
+                //console.log(sha_list)
                 let returnobject = {}
                 returnobject.sha_list = sha_list;
                 returnobject.repolist = repolist;
@@ -73,7 +73,7 @@ exports.downloadtwo = function (currobj) {
                 treeparsed =(parsed["tree"])
                 const keys = Object.values(treeparsed)
                 //console.log(keys)
-                console.log(values[i])
+                //console.log(values[i])
                 for (const key of keys) {
                     if (key["path"].indexOf(".py") !== -1){
                         filename = key["path"].split("/")
@@ -100,17 +100,20 @@ exports.downloadtwo = function (currobj) {
                 console.log(sendMetrics);
                 console.log("FINISH")
                 fsExtra.emptyDirSync(__dirname+"/downloadedfiles")
+                resolve(sendMetrics);
                 
             
              }).catch((err) => {
                  console.log("gtest");
              });
             //console.log(sha_list)
+            /*
             let returnobject = {}
             returnobject.sha_list = sha_list;
             returnobject.repolist = repolist;
             returnobject.username = username;
             resolve(returnobject);
+            */
             }).catch(function name(err) {
                 console.error(err.message);
             })
