@@ -34,7 +34,7 @@ export default class Chart extends PureComponent {
     console.log("test start")
 
     let name = "haoy2001";
-    $.getJSON('https://localhost:2525', function(data) {        
+    $.getJSON('http://localhost:2525/stats/piechart/Miguel-Caringal', function(data) {        
         console.log(data);
     });
 
