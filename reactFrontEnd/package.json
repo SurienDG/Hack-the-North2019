@@ -13,6 +13,7 @@
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.2",
     "react-particles-js": "^2.6.0",
+    "react-popup": "^0.10.0",
     "react-scripts": "^3.0.0",
     "react-scrollable-anchor": "^0.6.1",
     "react-visibility-sensor": "^5.0.2",
